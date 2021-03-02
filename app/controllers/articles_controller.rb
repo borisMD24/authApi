@@ -1,5 +1,8 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :update, :destroy]
+  before_action :find_user, only: %w[create]
+  before_action :find_user, only: %[update]
+  before_action :find_user, only: %w[create]
 
   # GET /articles
   def index
@@ -12,7 +15,6 @@ class ArticlesController < ApplicationController
   def show
     render json: @article
   end
-
   # POST /articles
   def create
     @article = Article.new(article_params)
