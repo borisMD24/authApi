@@ -1,8 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :update, :destroy]
-  before_action :find_user, only: %w[create]
-  before_action :find_user, only: %[update]
-  before_action :find_user, only: %w[create]
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
+  
 
   # GET /articles
   def index
@@ -28,6 +27,14 @@ class ArticlesController < ApplicationController
 
   # PATCH/PUT /articles/1
   def update
+
+    puts "***********************************************"
+    puts "***********************************************"
+    puts "***********************************************"
+    puts request.headers['Authorization'].inspect
+    puts "***********************************************"
+    puts "***********************************************"
+    puts "***********************************************"
     if @article.update(article_params)
       render json: @article
     else
